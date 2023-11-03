@@ -47,13 +47,17 @@ const routes: Routes = [
             component: PixContatosComponent
           },
         ]
-      },
+      }, 
       {
         path: '',
         component: LoginComponent
-      },  
-    ]
-  }
+      } 
+    ],
+  },
+  {
+    path: '**',
+    redirectTo: 'login'
+  }, 
 ]
 
 @NgModule({

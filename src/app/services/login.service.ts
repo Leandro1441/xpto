@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
 
-  private estaLogado = true
+  private estaLogado = false
 
   constructor() { }
 
