@@ -1,0 +1,101 @@
+@import '~bootstrap/dist/css/bootstrap.min.css'
+@import "~bootstrap-icons/font/bootstrap-icons.css"
+
+html
+    width: 100%
+    height: 100%
+
+body
+    width: 100%
+    height: 100%
+    max-width: 100%
+    max-height: 100%
+    // background-image: linear-gradient(to right, rgba(0, 206, 249) 0% 10%, #52c9b9 65% 100%)
+    background-color: rgb(154, 188, 255)
+    padding: 0
+    margin: 0
+    
+.logo-text
+    font-weight: bold
+    font-size: 40px
+    color: rgb(43, 89, 189)
+
+.input-text
+    max-width: 300px
+    width: 80%
+    border-block-color: black
+    border: 2px solid
+    border-radius: 5px
+    height: 40px
+    padding: 10px
+    -webkit-box-sizing: border-box
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+    // background-color: transparent
+
+.button-primary
+    //background-image: linear-gradient(to right, rgba(0, 0, 0), rgba(94, 94, 94))
+    background-color:  rgb(43, 89, 189)
+    max-width: 300px
+    width: 80%
+    color: white
+    font-weight: bold
+    border-radius: 20px
+    height: 40px
+    
+    
+.button-link
+    max-width: 300px
+    width: 80%
+    font-weight: 600
+    font-size: 14px
+    color: rgba(0, 0, 0)
+    border: 0
+    background-color: transparent
+
+button
+    &:disabled
+        opacity: .3
+        border: 1px solid rgba(0, 0, 0, .3)
+    
+
+.logo-content
+    display: flex
+    justify-content: center
+    // align-items: center
+    padding: 20px
+    width: 100%
+    height: 45%
+    min-height: 150px
+
+    .img-gear
+        width: 25px
+        height: 25px
+        position: absolute
+        align-self: flex-end
+        top: 0
+        margin-top: 10px
+        cursor: pointer
+
+    .img-arrow
+        width: 25px
+        height: 25px
+        position: absolute
+        align-self: flex-start
+        top: 0
+        margin-top: 10px
+        cursor: pointer
+
+    h1
+        text-align: center
+
+.hidden 
+    display: none
+
+.content-white
+    width: 100%
+    height: 100%
+    background-color: #fff
+    border-radius: 40px 40px 0 0
+    display: flex
+    flex-direction: column

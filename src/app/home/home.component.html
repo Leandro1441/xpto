@@ -1,0 +1,51 @@
+
+<div class="home">
+    <div class="logo-content">
+        <img class="img-gear" src="assets/icons/gear.svg">
+        <h1 class="logo-text"> Banco xpto </h1>
+        <p class="bem-vindo"> Bem vindo, Jose! </p>
+    </div>
+
+
+    <div class="content-white">
+        <div class="saldo">
+            <div class="saldo__valor">
+                <span> Saldo Disponível: </span>
+                <span *ngIf="mostrarSaldo"> {{ valor | currency : 'BRL' }}
+                </span>
+                <span *ngIf="!mostrarSaldo"> R$: ***** </span>
+            </div>  
+            <div class="saldo__ver">
+                <span id="olhoFechado" class="bi bi-eye-slash" (click)="verSaldo()"></span>
+                <span id="olhoAberto" class="bi bi-eye hidden" (click)="verSaldo()"></span>
+            </div>
+        </div>
+
+        <div class="content-bnt-horizontal">
+            <span>
+                <img src="assets/icons/pix.svg" (click)="navegarParaPix()">
+                <p>Pix</p>
+            </span>
+            
+            <span>
+                <img src="assets/icons/transfer.svg">
+                <p>Transferir</p>
+            </span>
+            <span>
+                <img src="assets/icons/bar-code-scan.svg">
+                <p>Boleto</p>
+            </span>
+            <span>
+                <img src="assets/icons/loan.svg">
+                <p>Empréstimo</p>
+            </span>
+        </div>
+
+        <div class="content-bnt-vertical">
+            <button class="button-primary mb-2"> Minha Fatura </button>
+            <button class="button-primary mb-2"> Meus seguros </button>
+            <button class="button-primary mb-2"> Benefícios </button>
+            <button class="button-primary mb-2"> Investimentos </button>
+        </div>
+    </div>  
+</div>

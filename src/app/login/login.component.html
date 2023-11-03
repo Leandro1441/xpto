@@ -1,0 +1,17 @@
+
+
+<div class="login form-group" *ngIf="loginForm" [formGroup]="loginForm">
+    <div class="logo-content">
+        <h1 class="logo-text"> Banco xpto </h1>
+    </div>
+        <input type="text" placeholder="CPF" class="input-text mb-2"
+            formControlName="cpf" [mask]="mask">
+
+        <input type="password" placeholder="Senha" class="input-text mb-2"
+            formControlName="senha" >
+
+        <button class="button-link mb-4"> Esqueci minha senha </button>
+        <button class="button-primary mb-2" (click)="validarLogin()" [disabled]="loginForm.invalid"> ENTRAR </button>
+        <button class="button-link mb-4"> Cadastrar
+            conta </button>
+</div>

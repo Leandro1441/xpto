@@ -1,0 +1,31 @@
+<div class="dados-pix">
+    <div class="logo-content">
+        <img class="img-arrow" (click)="navegar('contatos')" src="assets/icons/left-arrow.svg">
+
+        <img class="img-gear" src="assets/icons/gear.svg">
+        <span>
+            <img class="img" src="assets/icons/pix.svg">
+        </span>
+    </div>
+    <div class="content-white">
+        <h3> Enviar </h3>
+
+        <p class="p bold">Você vai pagar para:</p>
+
+        <p class="title ml-40" > {{ mandarPara?.nome }} </p>
+        <p class="p ml-40" > CPF: ***.000.000-** Banco XPTO S.A </p>
+        <p class="p ml-40" > Chave: {{ mandarPara?.chave }}  </p>
+
+        <p class="p bold mt-3" > Valor de transferência: </p>
+        <input currencyMask [(ngModel)]="valor" [options]="options" (keyup.enter)="getValorNumber() < 0.01 ? false : validarValor()">
+
+        <p class="p bold mt-3" > Forma de pagamento: </p>
+        <p class="p ml-40" > Conta corrente: </p>
+        <p class="p ml-50" > ag 0000 - Cc 00000000-1 </p>
+        <p class="p ml-40" > Saldo 5.000,00 </p>
+        <p class="p ml-40" > Saldo mais limite 7.000,00 </p>
+
+        <div class="div-btn">
+            <button type="submit" class="button-primary mb-2" [disabled]="getValorNumber() < 0.01"  (click)="validarValor()"> Continuar </button>
+    </div>
+</div>
