@@ -23,22 +23,28 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      cpf: ['35687422099', [Validators.required, regexCpf()]],
-      senha: ['11111111', [Validators.required, Validators.minLength(8)]]
+      cpf: ['47327205870', [Validators.required, regexCpf()]],
+      senha: ['111111', [Validators.required, Validators.minLength(6)]]
     })
   }
 
-  validarLogin() {
+  async validarLogin() {
     if (this.loginForm.invalid) return
 
     const cpf = this.loginForm.controls['cpf'].value
     const senha = this.loginForm.controls['senha'].value
 
-    const logou = this.loginService.validarLogin(cpf, senha)
-    
-    if(!logou) return
+    const logou = await this.loginService.validarLogin(cpf, senha).catch(() => {
+      alert('usuario ou senha errada!')
+      return false
+    })    
 
+    if(!logou) return
     this.router.navigate(['home'])
+  }
+
+  irCadastro() {
+    this.router.navigate(['cadastro'])
   }
 
 }

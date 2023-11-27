@@ -16,27 +16,16 @@
         <Button class="btn-novo-contatos mb-3" (click)="navegar('tipo')"> Pagar para novo contato</Button>
     
         <p class="title">Seus Contatos:</p>
-        <input type="text mb-3" placeholder="buscar contatos">
+        <!-- <input type="text mb-3" placeholder="buscar contatos"> -->
 
-        <div class="btn-contatos mt-2" (click)="contatos()">
-            <div class="nome-tres-pontos">
-                <p class="p">Andre da silva</p>
-            </div>
-            <p class="p">BCO XPTO - CPF: 000.000.000-00</p>
-        </div>
 
-        <div class="btn-contatos" (click)="contatos()">
-            <div class="nome-tres-pontos">
-                <p class="p">Andre da silva</p>
+        <ng-container *ngFor="let contatos of saldo?.cpfJaEnviado">
+            <div class="btn-contatos mt-2" (click)="contatos()">
+                <div class="nome-tres-pontos">
+                    <p class="p">Andre da silva</p>
+                </div>
+                <p class="p">BCO XPTO - CPF: 000.000.000-00</p>
             </div>
-            <p class="p">BCO XPTO - CPF: 000.000.000-00</p>
-        </div>
-
-        <div class="btn-contatos" (click)="contatos()">
-            <div class="nome-tres-pontos">
-                <p class="p">Andre da silva</p>
-            </div>
-            <p class="p">BCO XPTO - CPF: 000.000.000-00</p>
-        </div>
+        </ng-container>
     </div> 
 </div>

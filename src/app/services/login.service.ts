@@ -1,25 +1,76 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
+import { CookieService } from "ngx-cookie-service";
+import { lastValueFrom } from "rxjs";
+import { environment } from 'src/environments/environment';
+import { Login, Saldo } from "../types/auth.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private estaLogado = false
+  private token: string = ''
+  private cpf: string = ''
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) { }
 
-  setLogin(login = false) {
-    this.estaLogado = login
-
-    return this.estaLogado
+  getToken() {
+    const token = this.cookieService.get('tcc_token')
+    this.token = token
+    return token
   }
 
-  validarLogin(cpf: string, senha: string) {
-      return this.setLogin(true)
+  getCpf() {
+    const cpf = this.cookieService.get('tcc_cpf')
+    this.cpf = cpf
+    return cpf
   }
 
-  getLogin() {
-    return this.estaLogado
+  setToken(token: string) {
+    this.cookieService.set('tcc_token', token)
+    this.token = token
+  }
+
+  setCpf(cpf: string) {
+    this.cookieService.set('tcc_cpf', cpf)
+    this.cpf = cpf
+  }
+
+  deleteToken() {
+    this.cookieService.delete('tcc_token')
+    this.cookieService.delete('tcc_cpf')
+  }
+
+  async validarLogin(cpf: string, senha: string) {
+    const login = await this.login(cpf, senha)
+
+    if (login.token) {
+      this.setToken(login.token)
+      this.setCpf(cpf)
+    }
+    else this.deleteToken()
+
+    return !!login.token
+  }
+
+  async login(cpf: string, senha: string) {
+    return await lastValueFrom(this.http
+      .get<Login>(`${environment.api}/tcc/login?cpf_cnpj=${cpf}&senha=${senha}`))
+  }
+
+  ///////////////////// user //////////////////
+
+  async consultarSaldo() {
+    return await lastValueFrom(this.http
+      .get<Saldo>(`${environment.api}/tcc/saldo?cpf_cnpj=${this.cpf}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.token}`
+        }
+      }))
   }
 }

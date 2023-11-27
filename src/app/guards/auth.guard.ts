@@ -1,16 +1,22 @@
+import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
-import { inject } from '@angular/core';
 
 export const authGuard: CanActivateFn = async () => {
-  const estaLogado = inject(LoginService).getLogin()
+  const loginService = inject(LoginService)
+  const token = loginService.getToken()
+  const cpf = loginService.getCpf()
 
-  if(!estaLogado) {
+  const temToken = !!token.length
+  const temCpf = !!cpf.length
+
+  if (!temToken || !temCpf) {
+    loginService.deleteToken()
+
     const router = inject(Router)
-
     await router.navigate(['login'])
     return false
   }
 
-  return estaLogado
+  return temToken
 };

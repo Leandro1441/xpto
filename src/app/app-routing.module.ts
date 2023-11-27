@@ -8,6 +8,8 @@ import { PixConfirmarComponent } from './pix-confirmar/pix-confirmar.component';
 import { PixDadosComponent } from './pix-dados/pix-dados.component';
 import { PixContatosComponent } from './pix-contatos/pix-contatos.component';
 import { authGuard } from './guards/auth.guard';
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { NovoContatoPixComponent } from './novo-contato-pix/novo-contato-pix.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'cadastro',
+        component: CadastroComponent
       },
       {
         path: 'home',
@@ -45,6 +51,10 @@ const routes: Routes = [
           {
             path: 'contatos',
             component: PixContatosComponent
+          },
+          {
+            path: 'novo-contato-pix',
+            component: NovoContatoPixComponent
           },
         ]
       }, 

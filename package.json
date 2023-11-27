@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --watch",
+    "start": "ng serve -o --host 0.0.0.0",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -26,6 +26,7 @@
     "bootstrap-icons": "^1.11.1",
     "define-data-property": "^1.1.1",
     "ng2-currency-mask": "^13.0.3",
+    "ngx-cookie-service": "^17.0.0",
     "ngx-mask": "^16.3.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

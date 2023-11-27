@@ -1,0 +1,19 @@
+<div class="novo-contato" *ngIf="form" [formGroup]="form">
+    <div class="logo-content">
+        <img class="img-arrow" src="assets/icons/left-arrow.svg" (click)="navegar()">
+
+        <img class="img-gear" src="assets/icons/gear.svg">
+        <!-- <h1 class="logo-text"> Banco xpto </h1> -->
+        <span>
+            <img class="img" src="assets/icons/pix.svg">
+        </span>
+    </div>
+
+    <div class="content-white">
+        <p class="p bold mt-4" > Cpf: </p>
+        <input placeholder="CPF" class="input-text mb-2" [mask]="maskCpf" formControlName="cpf">
+
+        <button class="button-primary mb-2" [disabled]="form.invalid" (click)="validarCpf()"> continuar </button> 
+    </div>
+
+</div>

@@ -18,11 +18,12 @@ export class PixConfirmarComponent implements OnInit {
 
   ngOnInit() {
     this.mandarPara = this.pixService.getObj()
+    if (!this.mandarPara.chave) this.navegar('pix')
   }
 
   navegar(url: string) {
 
-    const arr = url === 'dados' ? ['pix', 'dados'] : []
+    const arr = url === 'dados' ? ['pix', 'dados'] : [url]
 
     this.router.navigate(arr)
   }
@@ -33,8 +34,8 @@ export class PixConfirmarComponent implements OnInit {
       alert('lat: ' + coordinates.coords.latitude + ' lot: ' + coordinates.coords.longitude)
     }
     catch (e) {
-      if (e instanceof (GeolocationPositionError) ){
-        if(e.code == 1) {
+      if (e instanceof (GeolocationPositionError)) {
+        if (e.code == 1) {
           alert('Permita acessar usa localização!')
         }
       }

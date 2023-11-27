@@ -13,6 +13,9 @@ import { PixDadosComponent } from './pix-dados/pix-dados.component';
 import { PixContatosComponent } from './pix-contatos/pix-contatos.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { HttpClientModule } from '@angular/common/http';
+import { CadastroComponent } from './cadastro/cadastro.component';
+import { NovoContatoPixComponent } from './novo-contato-pix/novo-contato-pix.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     PixComponent,
     PixConfirmarComponent,
     PixDadosComponent,
-    PixContatosComponent
+    PixContatosComponent,
+    CadastroComponent,
+    NovoContatoPixComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
     NgxMaskDirective,
     BrowserModule,
     FormsModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    HttpClientModule
   ],
   providers: [
     provideNgxMask()
