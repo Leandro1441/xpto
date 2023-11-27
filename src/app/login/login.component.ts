@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      cpf: ['47327205870', [Validators.required, regexCpf()]],
-      senha: ['111111', [Validators.required, Validators.minLength(6)]]
+      cpf: ['', [Validators.required, regexCpf()]],
+      senha: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
 
