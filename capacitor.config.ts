@@ -6,7 +6,7 @@ const config: CapacitorConfig = {
   webDir: 'dist/xpto',
   server: {
     androidScheme: 'https',
-    hostname: 'banco-xpto.netlify.app/',
+    url: "https://banco-xpto.netlify.app/",
     cleartext: true
   }
 };
