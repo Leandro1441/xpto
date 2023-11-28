@@ -52,6 +52,7 @@ export class PixConfirmarComponent implements OnInit {
         return true
       }
     }).then(async v => {
+      console.log("🚀 ~ file: pix-confirmar.component.ts:55 ~ PixConfirmarComponent ~ pagar ~ v:", v)
       try {
         if (v.dismiss == Swal.DismissReason.cancel || v.dismiss == Swal.DismissReason.backdrop) return      
         const coordinates = await Geolocation.getCurrentPosition()
@@ -85,6 +86,7 @@ export class PixConfirmarComponent implements OnInit {
         })
       }
       catch (e) {
+        console.log("🚀 ~ file: pix-confirmar.component.ts:88 ~ PixConfirmarComponent ~ pagar ~ e:", e)
         if (e instanceof (GeolocationPositionError)) {
           if (e.code == 1) {
             await Swal.fire({
