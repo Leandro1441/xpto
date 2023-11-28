@@ -53,7 +53,7 @@ export class PixConfirmarComponent implements OnInit {
       }
     }).then(async v => {
       try {
-        if (v.dismiss == Swal.DismissReason.cancel || v.dismiss == Swal.DismissReason.backdrop) return
+        if (v.dismiss == Swal.DismissReason.cancel || v.dismiss == Swal.DismissReason.backdrop) return      
         const coordinates = await Geolocation.getCurrentPosition()
 
         await this.pixService.enviarPix({
@@ -87,7 +87,11 @@ export class PixConfirmarComponent implements OnInit {
       catch (e) {
         if (e instanceof (GeolocationPositionError)) {
           if (e.code == 1) {
-            alert('Permita acessar usa localização!')
+            await Swal.fire({
+              text: 'Permita acessar usa localização!',
+              title: 'PIX',
+              icon: 'error'
+            })
           }
         }
       }
