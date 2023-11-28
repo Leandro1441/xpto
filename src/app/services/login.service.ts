@@ -1,30 +1,32 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { CookieService } from "ngx-cookie-service";
 import { lastValueFrom } from "rxjs";
 import { environment } from 'src/environments/environment';
 import { Login, Saldo } from "../types/auth.interface";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private token: string = ''
-  private cpf: string = ''
+  token: string = ''
+  cpf: string = ''
 
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) { }
 
-  getToken() {
+  getTokenCookie() {
     const token = this.cookieService.get('tcc_token')
     this.token = token
     return token
   }
 
-  getCpf() {
+  getCpfCookie() {
     const cpf = this.cookieService.get('tcc_cpf')
     this.cpf = cpf
     return cpf
@@ -65,12 +67,18 @@ export class LoginService {
   ///////////////////// user //////////////////
 
   async consultarSaldo() {
-    return await lastValueFrom(this.http
-      .get<Saldo>(`${environment.api}/tcc/saldo?cpf_cnpj=${this.cpf}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.token}`
-        }
-      }))
+    try {
+      return await lastValueFrom(this.http
+        .get<Saldo>(`${environment.api}/tcc/saldo?cpf_cnpj=${this.getCpfCookie()}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.getTokenCookie()}`
+          }
+        }))
+    }
+    catch (v) {
+      if (v instanceof HttpErrorResponse && v.error?.codigo === "UNAUTHORIZED") this.router.navigate(['login'])
+      return false
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { Saldo } from '../types/auth.interface';
+import { PixSaldo, PixService } from '../services/pix.service';
 
 @Component({
   selector: 'app-home',
@@ -10,18 +11,19 @@ import { Saldo } from '../types/auth.interface';
 })
 export class HomeComponent implements OnInit {
 
-  valor = 5000
+  valor = 0
   mostrarSaldo = true
-  saldo: Saldo | undefined
+  saldo: PixSaldo | undefined
   nome: string = ''
 
   constructor(
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private pixService: PixService
   ) { }
 
   async ngOnInit() {
-    this.saldo = await this.loginService.consultarSaldo()
+    this.saldo = await this.pixService.getSaldo(this.loginService.getCpfCookie(), this.loginService.getTokenCookie())
     this.valor = this.saldo.saldo
     this.nome = this.saldo.nome
   }

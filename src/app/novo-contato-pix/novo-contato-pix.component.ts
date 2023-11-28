@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { regexCpf } from '../validators/regexCpf.validator';
-import { PixService } from '../services/pix.service';
 import { LoginService } from '../services/login.service';
+import { PixService } from '../services/pix.service';
+import { regexCpf } from '../validators/regexCpf.validator';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-novo-contato-pix',
@@ -24,22 +25,38 @@ export class NovoContatoPixComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      cpf: ['21547686952', [Validators.required, regexCpf()]],
+      cpf: ['', [Validators.required, regexCpf()]],
     })
   }
 
   async validarCpf() {
     const cpf = this.form.controls['cpf'].value
-    const cpfValid = await this.pixService.getChavePix(this.loginService.getCpf(), cpf, 'CPF', this.loginService.getToken())
+    await this.pixService.getChavePix(this.loginService.getCpfCookie(), cpf, 'CPF', this.loginService.getTokenCookie())
+      .then(cpfValid => {
+        this.pixService.setChave(cpf, 'CPF')
+        this.pixService.setNome(cpfValid.nome)
+        this.navegar('dados')
+      })
+      .catch(async error => {
+        if (error.status === 403) {
+          await Swal.fire({
+            title: 'CPF',
+            text: 'Usuario não encontrado!',
+            icon: 'error'
+          })
+        } else {
+          await Swal.fire({
+            title: 'CPF',
+            text: 'Erro inesperado!',
+            icon: 'error'
+          })
+        }
+      })
 
-    this.pixService.setChave(cpf, 'CPF')
-    this.pixService.setNome(cpfValid.nome)
-    
-    if(cpfValid) this.navegar('dados') 
   }
 
   navegar(url = 'tipo') {
-    const arr = ['pix', url ]
+    const arr = ['pix', url]
     this.router.navigate(arr)
   }
 }

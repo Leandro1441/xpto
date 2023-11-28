@@ -11,24 +11,30 @@ export interface PixToSend {
 }
 
 export interface PixDestinatario {
-    "nome": string,
-    "instituicao_financeira": string,
-    "numeroContaRemetente": number,
-    "codigo": string,
-    "mensagem": string  
+  "nome": string,
+  "instituicao_financeira": string,
+  "numeroContaRemetente": number,
+  "codigo": string,
+  "mensagem": string
 }
 
-export interface PixSaldo{
-	"saldo": number,
-	"nome": string,
-	"limite_diario": number,
-	"limite_noturno": number,
-	"instituicao_financeira": string,
-	"numeroContaRemetente": number,
-	"codigo": string,
-	"mensagem": string,
-	"cpfJaEnviado": any[]
+export interface PixSaldo {
+  "saldo": number,
+  "nome": string,
+  "limite_diario": number,
+  "limite_noturno": number,
+  "instituicao_financeira": string,
+  "numeroContaRemetente": number,
+  "codigo": string,
+  "mensagem": string,
+  cpfJaEnviado: CpfJaEnviado[]
 }
+
+export interface CpfJaEnviado {
+  "cpf_cnpj": string,
+  "chave_pix": string,
+  "nome": string
+}[]
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +44,9 @@ export class PixService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+   
+  }
 
   setNome(nome: string) {
     this.mandarPara.nome = nome

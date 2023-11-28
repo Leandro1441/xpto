@@ -4,8 +4,13 @@ import { LoginService } from '../services/login.service';
 
 export const authGuard: CanActivateFn = async () => {
   const loginService = inject(LoginService)
-  const token = loginService.getToken()
-  const cpf = loginService.getCpf()
+
+  if(!loginService.cpf && !loginService.token) {
+    await loginService.consultarSaldo()
+  }
+
+  const token = loginService.getTokenCookie()
+  const cpf = loginService.getCpfCookie()
 
   const temToken = !!token.length
   const temCpf = !!cpf.length

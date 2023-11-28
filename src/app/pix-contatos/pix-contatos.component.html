@@ -19,12 +19,12 @@
         <!-- <input type="text mb-3" placeholder="buscar contatos"> -->
 
 
-        <ng-container *ngFor="let contatos of saldo?.cpfJaEnviado">
-            <div class="btn-contatos mt-2" (click)="contatos()">
+        <ng-container *ngFor="let contato of (saldo?.cpfJaEnviado || [])">
+            <div class="btn-contatos mt-2" (click)="contatos(contato)">
                 <div class="nome-tres-pontos">
-                    <p class="p">Andre da silva</p>
+                    <p class="p"> {{ contato.nome }}</p>
                 </div>
-                <p class="p">BCO XPTO - CPF: 000.000.000-00</p>
+                <p class="p">BCO XPTO - CPF: {{ transformar(contato.cpf_cnpj, true) }}</p>
             </div>
         </ng-container>
     </div> 

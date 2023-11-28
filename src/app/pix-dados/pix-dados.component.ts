@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PixService, PixToSend } from '../services/pix.service';
+import { PixSaldo, PixService, PixToSend } from '../services/pix.service';
 import { LoginService } from '../services/login.service';
 import { Saldo } from '../types/auth.interface';
 
@@ -17,7 +17,7 @@ export class PixDadosComponent implements OnInit {
     prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left'
   }
 
-  saldo: Saldo | undefined
+  saldo: PixSaldo | undefined
   constructor(
     private router: Router,
     private pixService: PixService,
@@ -26,11 +26,11 @@ export class PixDadosComponent implements OnInit {
 
   async ngOnInit() {
     this.mandarPara = this.pixService.getObj()
-
+    
     if(!this.mandarPara.chave ) this.navegar('pix')
     this.valor = this.mandarPara.valor?.toString() ?? ''
 
-    this.saldo = await this.loginService.consultarSaldo()
+    this.saldo = await this.pixService.getSaldo(this.loginService.getCpfCookie(), this.loginService.getTokenCookie())
   }
 
   navegar(url: string) {
