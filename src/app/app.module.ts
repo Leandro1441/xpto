@@ -17,7 +17,7 @@ import { PixContatosComponent } from './pix-contatos/pix-contatos.component';
 import { PixDadosComponent } from './pix-dados/pix-dados.component';
 import { pixTipoComponent } from './pix-tipo/pix-tipo.component';
 import { PixComponent } from './pix/pix.component';
-import { InterceptorHandler } from './services/Interceptor.interceptor';
+import { InterceptorHandler } from './services/interceptor.interceptor';
 
 @NgModule({
   declarations: [
