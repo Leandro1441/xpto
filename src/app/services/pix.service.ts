@@ -31,10 +31,33 @@ export interface PixSaldo {
 }
 
 export interface CpfJaEnviado {
-  "cpf_cnpj": string,
-  "chave_pix": string,
+  "cpf_cnpj": string
+  "chave_pix": string
   "nome": string
 }[]
+
+export interface PixParaMandar {
+    "cpf_remetente":string
+    "chave_pix_destinatario": string
+    "observacao": string
+    "valor_transferencia": number
+    "localizacao_ransferencia": string
+    "senha": string
+}
+
+
+export interface PixComprovante {
+    "valortransferencia": number
+    "dataTransferencia": string
+    "horaTransferencia": string
+    "nomeDestinatario": string
+    "nomeRemetente": string
+    "cpfRemetente": string
+    "cpfDestinatario": string
+    "codigoValidacao": string
+    "mensagem": string
+    "codigo": string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +107,17 @@ export class PixService {
       .post<PixSaldo>(`${environment.api}/tcc/consulta`, {
         cpf_cnpj: cpf
       }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      }))
+  }
+
+
+  async enviarPix(dto: PixParaMandar, token: string) {
+    return await lastValueFrom(this.http
+      .post<PixComprovante>(`${environment.api}/tcc/pix`, dto, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`

@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import Swal from 'sweetalert2';
+import { LoginService } from '../services/login.service';
 import { PixService, PixToSend } from '../services/pix.service';
 
 @Component({
@@ -14,7 +16,8 @@ export class PixConfirmarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private pixService: PixService
+    private pixService: PixService,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
@@ -30,24 +33,56 @@ export class PixConfirmarComponent implements OnInit {
   }
 
   async pagar() {
+
+    var pass = ''
     await Swal.fire({
-      title: 'SENHA DO APP',
-      input: "text",
+      title: 'SENHA',
+      input: 'password',
       showCancelButton: true,
       customClass: {
         validationMessage: 'my-validation-message',
       },
       preConfirm: (value) => {
-        if (!value.value || value.value.length < 6 || value.value.length > 12) {
-          Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Senha errada!')
+        if (!value || value.length < 6 || value.length > 12) {
+          Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Senha errada4!')
           return false
         }
+
+        pass = value
         return true
       }
     }).then(async v => {
       try {
+        if (v.dismiss == Swal.DismissReason.cancel || v.dismiss == Swal.DismissReason.backdrop) return
         const coordinates = await Geolocation.getCurrentPosition()
-        alert('lat: ' + coordinates.coords.latitude + ' lot: ' + coordinates.coords.longitude)
+
+        await this.pixService.enviarPix({
+          cpf_remetente: this.loginService.getCpfCookie(),
+          chave_pix_destinatario: this.mandarPara!.chave!,
+          senha: pass,
+          valor_transferencia: this.mandarPara!.valor!,
+          localizacao_ransferencia: 'lat:' + coordinates.coords.latitude + ';lot:' + coordinates.coords.longitude,
+          observacao: ''
+        }, this.loginService.getTokenCookie()).then(async v => {
+          if (v.dataTransferencia) {
+            await Swal.fire({
+              text: 'Transferencia feita com sucesso!',
+              title: 'PIX',
+            }).then(() => {
+              this.router.navigate(['home'])
+            })
+          }
+        }).catch(async v => {
+          if (v && v instanceof HttpErrorResponse) {
+            await Swal.fire({
+              text: v.error.mensagem,
+              title: 'PIX',
+              icon: 'error'
+            }).then(() => {
+              this.pagar()
+            })
+          }
+        })
       }
       catch (e) {
         if (e instanceof (GeolocationPositionError)) {

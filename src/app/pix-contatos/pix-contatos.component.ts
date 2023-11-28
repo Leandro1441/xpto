@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CpfJaEnviado, PixSaldo, PixService } from '../services/pix.service';
 import { LoginService } from '../services/login.service';
+import { CpfJaEnviado, PixSaldo, PixService } from '../services/pix.service';
 
 
 @Component({

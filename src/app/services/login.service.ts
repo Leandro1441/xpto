@@ -77,7 +77,10 @@ export class LoginService {
         }))
     }
     catch (v) {
-      if (v instanceof HttpErrorResponse && v.error?.codigo === "UNAUTHORIZED") this.router.navigate(['login'])
+      if (v instanceof HttpErrorResponse && v.error?.codigo === "UNAUTHORIZED") {
+        this.deleteToken()
+        this.router.navigate(['login'])
+      }
       return false
     }
   }
