@@ -14,7 +14,7 @@ export class RastreamentoComponent implements OnInit {
   dados: TransacaoRastreavel[] = []
   detalhe: TransacaoDetalhe | undefined
   timeout: any
-  search = '473272'
+  search = ''
 
   async ngOnInit() {
     this.getTransacoesRastreaveis(true)
