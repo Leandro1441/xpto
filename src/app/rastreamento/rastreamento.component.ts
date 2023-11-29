@@ -61,7 +61,7 @@ export class RastreamentoComponent implements OnInit {
 
   openMaps(local: string) {
     const latLot = local.trim().replace(' ', '').replace('lat:', '').replace('lot:','').split(';')
-    const url = 'https://www.google.com/maps/place/' + latLot[0] + ' ' + latLot[1]
+    const url = 'https://www.google.com/maps/place/' + (latLot[0] ? latLot[0] : '') + ' ' + (latLot[1] ? latLot[1] : '')
     window.open(url)
   }
 
