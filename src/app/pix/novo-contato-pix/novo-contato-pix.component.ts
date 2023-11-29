@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../services/login.service';
-import { PixService } from '../services/pix.service';
-import { regexCpf } from '../validators/regexCpf.validator';
+import { LoginService } from '../../services/login.service';
+import { PixService } from '../../services/pix.service';
+import { validatorCpf } from '../../validators/regexCpf.validator';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,7 +25,7 @@ export class NovoContatoPixComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      cpf: ['', [Validators.required, regexCpf()]],
+      cpf: ['', [Validators.required, validatorCpf()]],
     })
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { regexCpf } from '../validators/regexCpf.validator';
+import { validatorCpf } from '../../validators/regexCpf.validator';
 
 @Component({
   selector: 'app-cadastro',
@@ -25,7 +25,7 @@ export class CadastroComponent implements OnInit {
 
   ngOnInit() {
     this.cadastroForm = this.formBuilder.group({
-      cpf: ['47327205870', [Validators.required, regexCpf()]],
+      cpf: ['47327205870', [Validators.required, validatorCpf()]],
       nome: ['', [Validators.required, Validators.minLength(3), Validators.max(20)]],
       sobrenome: ['', [Validators.required, Validators.minLength(3), Validators.max(50)]],
       data_nascimento: ['', [Validators.required]],

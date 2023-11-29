@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PixSaldo, PixService, PixToSend } from '../services/pix.service';
-import { LoginService } from '../services/login.service';
-import { Saldo } from '../types/auth.interface';
+import { PixSaldo, PixService, PixToSend } from '../../services/pix.service';
+import { LoginService } from '../../services/login.service';
+import { Saldo } from '../../types/auth.interface';
 
 @Component({
   selector: 'app-pix-dados',

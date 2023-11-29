@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import Swal from 'sweetalert2';
-import { LoginService } from '../services/login.service';
-import { PixService, PixToSend } from '../services/pix.service';
+import { LoginService } from '../../services/login.service';
+import { PixService, PixToSend } from '../../services/pix.service';
 
 @Component({
   selector: 'app-pix-confirmar',

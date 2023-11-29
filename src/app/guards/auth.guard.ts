@@ -6,7 +6,7 @@ export const authGuard: CanActivateFn = async () => {
   const loginService = inject(LoginService)
 
   if(!loginService.cpf && !loginService.token) {
-    await loginService.consultarSaldo()
+    await loginService.validarToken()
   }
 
   const token = loginService.getTokenCookie()

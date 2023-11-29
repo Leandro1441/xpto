@@ -1,7 +1,7 @@
 
 import { AbstractControl } from "@angular/forms"
 
-export function regexCpf() {
+export function validatorCpf() {
     return (control: AbstractControl) => {
         const strCPF: string = control.value
         var soma

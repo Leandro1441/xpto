@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { pixTipoComponent } from './pix-tipo/pix-tipo.component';
+import { pixTipoComponent } from './pix/pix-tipo/pix-tipo.component';
 import { PixComponent } from './pix/pix.component';
-import { PixConfirmarComponent } from './pix-confirmar/pix-confirmar.component';
-import { PixDadosComponent } from './pix-dados/pix-dados.component';
-import { PixContatosComponent } from './pix-contatos/pix-contatos.component';
+import { PixConfirmarComponent } from './pix/pix-confirmar/pix-confirmar.component';
+import { PixDadosComponent } from './pix/pix-dados/pix-dados.component';
+import { PixContatosComponent } from './pix/pix-contatos/pix-contatos.component';
 import { authGuard } from './guards/auth.guard';
-import { CadastroComponent } from './cadastro/cadastro.component';
-import { NovoContatoPixComponent } from './novo-contato-pix/novo-contato-pix.component';
+import { CadastroComponent } from './pix/cadastro/cadastro.component';
+import { NovoContatoPixComponent } from './pix/novo-contato-pix/novo-contato-pix.component';
 import { RastreamentoComponent } from './rastreamento/rastreamento.component';
 
 const routes: Routes = [

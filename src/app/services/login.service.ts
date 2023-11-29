@@ -66,7 +66,7 @@ export class LoginService {
 
   ///////////////////// user //////////////////
 
-  async consultarSaldo() {
+  async validarToken() {
     try {
       return await lastValueFrom(this.http
         .get<Saldo>(`${environment.api}/tcc/saldo?cpf_cnpj=${this.getCpfCookie()}`, {
