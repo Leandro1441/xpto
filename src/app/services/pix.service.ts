@@ -37,26 +37,44 @@ export interface CpfJaEnviado {
 }[]
 
 export interface PixParaMandar {
-    "cpf_remetente":string
-    "chave_pix_destinatario": string
-    "observacao": string
-    "valor_transferencia": number
-    "localizacao_ransferencia": string
-    "senha": string
+  "cpf_remetente": string
+  "chave_pix_destinatario": string
+  "observacao": string
+  "valor_transferencia": number
+  "localizacao_ransferencia": string
+  "senha": string
 }
 
 
 export interface PixComprovante {
-    "valortransferencia": number
-    "dataTransferencia": string
-    "horaTransferencia": string
-    "nomeDestinatario": string
-    "nomeRemetente": string
-    "cpfRemetente": string
-    "cpfDestinatario": string
-    "codigoValidacao": string
-    "mensagem": string
-    "codigo": string
+  "valortransferencia": number
+  "dataTransferencia": string
+  "horaTransferencia": string
+  "nomeDestinatario": string
+  "nomeRemetente": string
+  "cpfRemetente": string
+  "cpfDestinatario": string
+  "codigoValidacao": string
+  "mensagem": string
+  "codigo": string
+}
+
+
+
+export interface TransacaoRastreavel {
+  cpfCnpj: string
+  idTransferencia: string
+}
+
+export interface TransacaoDetalhe {
+  "cpfCnpj": string
+  "cpfCnpjDestinatario": string
+  "localizacaoTransferencia": string
+  "chavePixDestinatario": string
+  "dataTransferencia": string
+  "horaTransderencia": string
+  "tipoTransferencia": string
+  "idTransferencia": string
 }
 
 @Injectable({
@@ -67,8 +85,8 @@ export class PixService {
 
   constructor(
     private http: HttpClient
-  ) { 
-   
+  ) {
+
   }
 
   setNome(nome: string) {
@@ -100,6 +118,17 @@ export class PixService {
           'Authorization': `Bearer ${token}`
         }
       }))
+  }
+
+  async getTransacoesRastreaveis(cpf?: string) {
+    const query = `?cpf=${cpf}`
+    return await lastValueFrom(this.http
+      .get<TransacaoRastreavel[]>(`${environment.api}/tcc/consulta_cpf${query}`))
+  }
+
+  async getDadosTransacoes(cpf: string, idTransferencia: string) {
+    return await lastValueFrom(this.http
+      .get<TransacaoDetalhe[]>(`${environment.api}/tcc/detalhes?cpf=${cpf}&idTransferencia=${idTransferencia}`))
   }
 
   async getSaldo(cpf: string, token: string) {

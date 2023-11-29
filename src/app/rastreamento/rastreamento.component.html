@@ -1,0 +1,72 @@
+<div class="rastreamento">
+    <div class="logo-content">
+        <img *ngIf="detalhe" class="img-arrow" src="assets/icons/left-arrow.svg" (click)="listar()">
+
+        <span>
+            <img class="img" src="assets/icons/pix.svg">
+        </span>
+    </div>
+
+    <div class="content-white">
+        <div class="dados" *ngIf="!detalhe">
+            <div style="display: flex">
+                <h5> CPF:</h5>
+                <input [(ngModel)]='search' style="width: 300px;" type="text"  class="input-text mb-2" (keyup)="getTransacoesRastreaveis()">
+            </div>
+
+            <div style="display: flex; width: 100%; max-width: 400px;">
+                <table class="table table-Secondary" >
+                    <thead>
+                        <tr>
+                            <th scope="colgroup"> ID </th>
+                            <th scope="colgroup"> CPF </th>
+                            <th scope="colgroup" style="text-align: center;"> Detalhes </th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let dado of dados">
+                        <tr>
+                            <td>{{dado.idTransferencia}}</td>
+                            <td>{{transformar(dado.cpfCnpj)}}</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-link" style="padding: 0; width: 100%; text-decoration:none;" (click)="verDetalhe(dado.cpfCnpj, dado.idTransferencia)"> VER </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="dados" *ngIf="detalhe"> 
+            <div style="display: flex; width: 100%; max-width: 400px;">
+                <table class="table table-Secondary" >
+                    <tbody>
+                        <tr>
+                            <td class="td-bolder">CPF REMETENDE</td>
+                            <td>{{ detalhe.cpfCnpj }}</td>
+                        </tr>
+                        <tr>
+                            <td class="td-bolder">CPF Destinatario</td>
+                            <td>{{ detalhe.cpfCnpjDestinatario }}</td>
+                        </tr>
+                        <tr>
+                            <td class="td-bolder">Chave pix</td>
+                            <td>{{ detalhe.chavePixDestinatario }}</td>
+                        </tr>
+                        <tr>
+                            <td class="td-bolder">data e hora</td>
+                            <td>{{ detalhe.dataTransferencia + ' ' + detalhe.horaTransderencia | date : 'dd/MM/yyyy HH:mm' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="td-bolder">Local</td>
+                            <td> 
+                                <button class="btn btn-link" style="padding: 0; text-decoration:none;" (click)="openMaps(detalhe.localizacaoTransferencia)"> VER NO MAPA </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

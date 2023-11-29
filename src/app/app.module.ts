@@ -18,6 +18,7 @@ import { PixDadosComponent } from './pix-dados/pix-dados.component';
 import { pixTipoComponent } from './pix-tipo/pix-tipo.component';
 import { PixComponent } from './pix/pix.component';
 import { InterceptorHandler } from './services/interceptor.interceptor';
+import { RastreamentoComponent } from './rastreamento/rastreamento.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { InterceptorHandler } from './services/interceptor.interceptor';
     PixContatosComponent,
     CadastroComponent,
     NovoContatoPixComponent,
+    RastreamentoComponent,
   ],
   imports: [
     BrowserModule,

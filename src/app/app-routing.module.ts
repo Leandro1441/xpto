@@ -10,6 +10,7 @@ import { PixContatosComponent } from './pix-contatos/pix-contatos.component';
 import { authGuard } from './guards/auth.guard';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { NovoContatoPixComponent } from './novo-contato-pix/novo-contato-pix.component';
+import { RastreamentoComponent } from './rastreamento/rastreamento.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'rastreamento',
+        component: RastreamentoComponent
       },
       {
         path: 'cadastro',
